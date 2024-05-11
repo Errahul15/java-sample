@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('SCM') {
+            steps {
+               git credentialsId: '8472505d-e15a-4d71-a6b0-30745c1a5f9c', url: 'https://github.com/Errahul15/java-sample.git'
+            }
+        }
+         stage('install') {
+            steps {
+              sh "mvn install"
+            }
+        }
+         stage('test') {
+            steps {
+               sh "mvn test"
+            }
+        }
+         stage('compile') {
+            steps {
+               sh "mvn compile"
+            }
+        }
+         stage('package') {
+            steps {
+                sh "mvn package"
+            }
+        }
+    }
+}
